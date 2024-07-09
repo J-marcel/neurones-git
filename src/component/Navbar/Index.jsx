@@ -185,7 +185,7 @@ export default function Navbar() {
                         component="div"
                         sx={{ display: { xs: 'none', sm: 'block' } }}
                     >
-                        MUI
+                        Neurones Tech
                     </Typography>
                     <Search>
                         <SearchIconWrapper>
