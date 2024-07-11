@@ -7,6 +7,7 @@ import Etudiants from './component/Etudiants/Etudiants';
 import Entreprises from './component/Entreprises/Entreprises';
 import Stagiaires from './component/Stagiaires/Stagiaires';
 import Administrateurs from './component/Administrateurs/Administrateurs';
+import Souris from './component/Souris/Souris';
 
 
 
@@ -14,6 +15,7 @@ import Administrateurs from './component/Administrateurs/Administrateurs';
 function App() {
   return (
     <BrowserRouter>
+    <Souris/>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/etudiants" element={<Etudiants />} />

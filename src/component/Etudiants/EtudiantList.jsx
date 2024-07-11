@@ -26,15 +26,31 @@ import Swal from "sweetalert2";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+import BasicModal from '../Modal/Model';
 import Modal from '@mui/material/Modal';
+import AddEtudiants from './AddEtudiants';
 
 
+const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+};
 
 export default function EtudiantList() {
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const empCollectionRef = collection(db, "Etudiants");
     const [rows, setRows] = useState([]);
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
 
     useEffect(() => {
         getUsers();
@@ -99,171 +115,186 @@ const deleteApi = async (id) => {
     };
 
     return (
-        <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+        <>
+            <div>
+                <Button/>
+                <Modal
+                    open={open}
+                    // onClose={handleClose}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                >
+                    <Box sx={style}>
+                        <AddEtudiants handleClose={handleClose}/>
+                    </Box>
+                </Modal>
+            </div>
+            <Paper sx={{ width: '100%', overflow: 'hidden' }}>
 
-            <Typography
-                gutterBottom
-                variant="h5"
-                component="div"
-                sx={{ padding: "20px" }}
-            >
-                Listes des Etudiants
-            </Typography>
-            <Divider />
-            <Box height={10} />
-            <Stack direction="row" spacing={2} className="my-2 mb-2">
-                <Autocomplete
-                    disablePortal
-                    id="combo-box-demo"
-                    options={rows}
-                    sx={{ width: 300 }}
-                    onChange={(e, v) => filterData(v)}
-                    getOptionLabel={(rows) => rows.name || ""}
-                    renderInput={(params) => (
-                        <TextField {...params} size="small" label="Search Products" />
-                    )}
-                />
                 <Typography
-                    variant="h6"
+                    gutterBottom
+                    variant="h5"
                     component="div"
-                    sx={{ flexGrow: 1 }}
-                ></Typography>
-                <Button variant="contained" endIcon={<AddCircleIcon/>}>
-                    Ajouter
-                </Button>
-            </Stack>
-            <Box height={10} />
-            <TableContainer sx={{ maxHeight: 440 }}>
-                <Table stickyHeader aria-label="sticky table">
-                    <TableHead>
-                        <TableRow>
-                            <TableCell
+                    sx={{ padding: "20px" }}
+                >
+                    Listes des Etudiants
+                </Typography>
+                <Divider />
+                <Box height={10} />
+                <Stack direction="row" spacing={2} className="my-2 mb-2">
+                    <Autocomplete
+                        disablePortal
+                        id="combo-box-demo"
+                        options={rows}
+                        sx={{ width: 300 }}
+                        onChange={(e, v) => filterData(v)}
+                        getOptionLabel={(rows) => rows.name || ""}
+                        renderInput={(params) => (
+                            <TextField {...params} size="small" label="Search Products" />
+                        )}
+                    />
+                    <Typography
+                        variant="h6"
+                        component="div"
+                        sx={{ flexGrow: 1 }}
+                    ></Typography>
+                    <Button variant="contained" endIcon={<AddCircleIcon />} onClick={handleOpen}>
+                        Ajouter
+                    </Button>
+                </Stack>
+                <Box height={10} />
+                <TableContainer sx={{ maxHeight: 440 }}>
+                    <Table stickyHeader aria-label="sticky table">
+                        <TableHead>
+                            <TableRow>
+                                <TableCell
 
-                                align="left"
-                                style={{ minWidth: "100px" }}
-                            >
-                                Nom
-                            </TableCell>
-                            <TableCell
+                                    align="left"
+                                    style={{ minWidth: "100px" }}
+                                >
+                                    Nom
+                                </TableCell>
+                                <TableCell
 
-                                align="left"
-                                style={{ minWidth: "100px" }}
-                            >
-                                E-mail
-                            </TableCell>
-                            <TableCell
+                                    align="left"
+                                    style={{ minWidth: "100px" }}
+                                >
+                                    E-mail
+                                </TableCell>
+                                <TableCell
 
-                                align="left"
-                                style={{ minWidth: "100px" }}
-                            >
-                                Téléphone
-                            </TableCell>
-                            <TableCell
+                                    align="left"
+                                    style={{ minWidth: "100px" }}
+                                >
+                                    Téléphone
+                                </TableCell>
+                                <TableCell
 
-                                align="left"
-                                style={{ minWidth: "100px" }}
-                            >
-                                Pays
-                            </TableCell>
-                            <TableCell
+                                    align="left"
+                                    style={{ minWidth: "100px" }}
+                                >
+                                    Pays
+                                </TableCell>
+                                <TableCell
 
-                                align="left"
-                                style={{ minWidth: "100px" }}
-                            >
-                                Ville
-                            </TableCell>
-                            <TableCell
+                                    align="left"
+                                    style={{ minWidth: "100px" }}
+                                >
+                                    Ville
+                                </TableCell>
+                                <TableCell
 
-                                align="left"
-                                style={{ minWidth: "100px" }}
-                            >
-                                Date d'inscription
-                            </TableCell>
-                            <TableCell
+                                    align="left"
+                                    style={{ minWidth: "100px" }}
+                                >
+                                    Date d'inscription
+                                </TableCell>
+                                <TableCell
 
-                                align="left"
-                                style={{ minWidth: "100px" }}
-                            >
-                                Status
-                            </TableCell>
-                            <TableCell
+                                    align="left"
+                                    style={{ minWidth: "100px" }}
+                                >
+                                    Status
+                                </TableCell>
+                                <TableCell
 
-                                align="left"
-                                style={{ minWidth: "100px" }}
-                            >
-                                Action
-                            </TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {rows
-                            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                            .map((row) => {
-                                return (
-                                    <TableRow hover role="checkbox" tabIndex={-1}>
+                                    align="left"
+                                    style={{ minWidth: "100px" }}
+                                >
+                                    Action
+                                </TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {rows
+                                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                .map((row) => {
+                                    return (
+                                        <TableRow hover role="checkbox" tabIndex={-1}>
 
-                                        <TableCell key={row.id} align="left">
-                                            {row.name}
-                                        </TableCell>
-                                        <TableCell key={row.id} align="left">
-                                            {row.email}
-                                        </TableCell>
-                                        <TableCell key={row.id} align="left">
-                                            {row.phone}
-                                        </TableCell>
-                                        <TableCell key={row.id} align="left">
-                                            {row.country}
-                                        </TableCell>
-                                        <TableCell key={row.id} align="left">
-                                            {row.city}
-                                        </TableCell>
-                                        <TableCell key={row.id} align="left">
-                                            {row.date}
-                                        </TableCell>
-                                        <TableCell key={row.id} align="left">
-                                            <span style={getStatusStyle(row.status)}>
-                                                {getStatusText(row.status)}
-                                            </span>
-                                        </TableCell>
-                                        <TableCell align="left">
-                                            <Stack spacing={2} direction="row">
-                                                <EditIcon
-                                                    style={{
-                                                        fontSize: "20px",
-                                                        color: "blue",
-                                                        cursor: "pointer",
-                                                    }}
-                                                    className="cursor-pointer"
-                                                // onClick={() => editUser(row.id)}
-                                                />
-                                                <DeleteIcon
-                                                    style={{
-                                                        fontSize: "20px",
-                                                        color: "darkred",
-                                                        cursor: "pointer",
-                                                    }}
-                                                    onClick={() => {
-                                                        deleteUser(row.id);
-                                                    }}
-                                                />
-                                            </Stack>
-                                        </TableCell>
+                                            <TableCell key={row.id} align="left">
+                                                {row.name}
+                                            </TableCell>
+                                            <TableCell key={row.id} align="left">
+                                                {row.email}
+                                            </TableCell>
+                                            <TableCell key={row.id} align="left">
+                                                {row.phone}
+                                            </TableCell>
+                                            <TableCell key={row.id} align="left">
+                                                {row.country}
+                                            </TableCell>
+                                            <TableCell key={row.id} align="left">
+                                                {row.city}
+                                            </TableCell>
+                                            <TableCell key={row.id} align="left">
+                                                {row.date}
+                                            </TableCell>
+                                            <TableCell key={row.id} align="left">
+                                                <span style={getStatusStyle(row.status)}>
+                                                    {getStatusText(row.status)}
+                                                </span>
+                                            </TableCell>
+                                            <TableCell align="left">
+                                                <Stack spacing={2} direction="row">
+                                                    <EditIcon
+                                                        style={{
+                                                            fontSize: "20px",
+                                                            color: "blue",
+                                                            cursor: "pointer",
+                                                        }}
+                                                        className="cursor-pointer"
+                                                    // onClick={() => editUser(row.id)}
+                                                    />
+                                                    <DeleteIcon
+                                                        style={{
+                                                            fontSize: "20px",
+                                                            color: "darkred",
+                                                            cursor: "pointer",
+                                                        }}
+                                                        onClick={() => {
+                                                            deleteUser(row.id);
+                                                        }}
+                                                    />
+                                                </Stack>
+                                            </TableCell>
 
-                                    </TableRow>
-                                );
-                            })}
-                    </TableBody>
-                </Table>
-            </TableContainer>
-            <TablePagination
-                rowsPerPageOptions={[10, 25, 100]}
-                component="div"
-                count={rows.length}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                onPageChange={handleChangePage}
-                onRowsPerPageChange={handleChangeRowsPerPage}
-            />
-        </Paper>
+                                        </TableRow>
+                                    );
+                                })}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+                <TablePagination
+                    rowsPerPageOptions={[10, 25, 100]}
+                    component="div"
+                    count={rows.length}
+                    rowsPerPage={rowsPerPage}
+                    page={page}
+                    onPageChange={handleChangePage}
+                    onRowsPerPageChange={handleChangeRowsPerPage}
+                />
+            </Paper></>
+       
     );
 }
