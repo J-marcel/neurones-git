@@ -9,6 +9,7 @@ import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import AccordionDash from './../Accordion/AccordionDash';
 // import { Bar} from '../Charts/Bar';
 import Bar from './../Charts/Bar';
+import BasicLineChart from '../Charts/BasicLineChart';
 
 export default function Home() {
   return (
@@ -97,18 +98,6 @@ export default function Home() {
                       </div>
                     </Stack>
                   </Card>
-                  <Card sx={{ minWidth: 345 }}>
-                    <Stack spacing={2} direction="row">
-                      <div className='iconstyleblack'>
-                        <StorefrontIcon />
-                      </div>
-                      <div className='paddingall'>
-                        <span className="pricetitle" id='pricetitle'>200K</span>
-                        <br />
-                        <span className="pricesubtitle">Total</span>
-                      </div>
-                    </Stack>
-                  </Card>
                 </Stack>
               </Grid>
             </Grid>
@@ -131,7 +120,8 @@ export default function Home() {
                         Popular Products
                       </Typography>
                     </div>
-                    <AccordionDash />
+                    {/* <AccordionDash /> */}
+                    <BasicLineChart />
                   </CardContent>
                 </Card>
               </Grid>
